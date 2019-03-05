@@ -1,19 +1,19 @@
 import React from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Nav";
 import Header from "./components/Header";
-import MemoryCard from "./components/MemoryCard";
+import MemoryCard from "./components/Card";
 import cards from "./cards.json";
 
-const randomizedCards = cardSet => {
-  for (let i = 0; i < cardSet.length - 1; i++) {
-    const j = i + Math.floor(Math.random() * (cardset.length - i));
+const randomizedCards = cards => {
+  for (let i = 0; i < cards.length - 1; i++) {
+    const j = i + Math.floor(Math.random() * (cards.length - i));
 
-    const temp = cardSet[j];
-    cardSet[j] = cardSet[i];
-    cardset[i] = temp;
+    const temp = cards[j];
+    cards[j] = cards[i];
+    cards[i] = temp;
   }
-  console.log(cardset);
-  return cardSet;
+  console.log(cards);
+  return cards;
 };
 
 let pickedCards = [];
@@ -22,7 +22,7 @@ class App extends React.Component {
   state = {
     score: 0,
     highScore: 0,
-    navbarMessage: "Click a Person to Begin",
+    navbarMessage: "Defeat enemies by clicking on them only once!",
     cards: cards,
     randomCards: cards
   };
@@ -38,14 +38,14 @@ class App extends React.Component {
         navbarMessage: "You guessed correctly!"
       });
       if (this.state.score >= this.state.highScore) {
-        this.setState({ highScore: this.state.Score + 1 });
+        this.setState({ highScore: this.state.score + 1 });
       }
       this.setState({
         randomCards: randomizedCards(cards)
       });
     } else {
       this.setState({
-        sore: 0,
+        score: 0,
         randomCards: randomizedCards(cards),
         navbarMessage: "You guessed incorrectly!"
       });
